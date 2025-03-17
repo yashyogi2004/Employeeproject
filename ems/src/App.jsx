@@ -6,7 +6,7 @@ import { getLocalStorage, setLocalStorage } from './utils/localStorage';
 import { AuthContext } from './Context/AuthProvider';
 const App =()=>{
 const [user, setUser] = useState(null);
-const authData =useContext(AuthContext);
+const [userData, setUserData] =useContext(AuthContext);
 const [LoggedInUserData, setLoggedInUserData] = useState(null);
 
 // useEffect(() => {
@@ -28,12 +28,12 @@ useEffect(() => {
 
 const handleLogin =(email,password)=>{
 if(email=='admin@example.com'&& password=='admin123'){
-  const admin = authData.admin.find((e)=>email==e.email && password==e.password);
+  const admin = userData.admin.find((e)=>email==e.email && password==e.password);
  setUser('admin');
  setLoggedInUserData(admin);
  localStorage.setItem('loggedInUser',JSON.stringify({role:'admin',data:admin}));
-}else if(authData  ){
-  const employee =authData.employees.find((e)=>email==e.email && password==e.password)
+}else if(userData){
+  const employee = userData.employees.find((e)=>email==e.email && password==e.password)
   if(employee){
 
     setUser('employee'); 

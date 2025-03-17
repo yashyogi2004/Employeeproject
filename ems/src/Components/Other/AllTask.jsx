@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../../Context/AuthProvider';
  
 const AllTask =()=>{
-   const AuthData = useContext(AuthContext);
+   const [userData, setUserData] = useContext(AuthContext);
 
    return(
          <div className='bg-[#1c1c1c1c] p-5 w-full mt-5 rounded h-60 '>
@@ -14,7 +14,7 @@ const AllTask =()=>{
       <h5 className='w-1/5 bg-red-500'>Failed</h5>
    </div>
              <div className='h-[80%] overflow-auto'>
-             {AuthData.employees.map((elem,)=>{
+             {userData.employees.map((elem,)=>{
       return(
       <div className='border-violet-50 border-2  mb-2 py-2 px-4 flex justify-between rounded w-full'>
       <h2 className='w-1/5 text-red-500' >{elem.name} </h2>

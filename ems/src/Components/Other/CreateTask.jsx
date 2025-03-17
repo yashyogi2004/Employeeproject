@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
+import  { useContext, useState } from 'react';
+import { AuthContext } from '../../Context/AuthProvider';
 const CreateTask =()=>{
+     const [userData, setUserData] = useContext(AuthContext);
     const [taskTitle, setTaskTitle] = useState('');
     const [Taskdesc, setTaskdesc] = useState('');
     const [TaskDate, setTaskDate] = useState('');
@@ -8,15 +11,17 @@ const CreateTask =()=>{
     const [newtask, setNewTask] = useState({});
     const submitHandler=(e)=>{
         e.preventDefault();
-        setNewTask({taskTitle,Taskdesc,TaskDate,category,active:false,new_task:true,failed:false,completed:false});
-         const data=JSON.parse(localStorage.getItem('employees'));
+        setNewTask({title:taskTitle,description:Taskdesc,date:TaskDate,category:category,active:false,new_task:true,failed:false,completed:false});
+         const data=userData.employees;
          data.forEach(function(elem){
            if(elem.name==assignTo){
             elem.tasks.push(newtask);
             elem.task_numbers.new_task=elem.task_numbers.new_task+1;
            }
          });
-         localStorage.setItem('employees',JSON.stringify(data));
+      setUserData({employees:data});
+      localStorage.setItem('employees',JSON.stringify(data));
+      
          setTaskTitle('');
          setTaskdesc('');
          setTaskDate('');
